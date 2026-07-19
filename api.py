@@ -61,6 +61,21 @@ def cover_url(item: dict) -> str:
     return f"{COVER_BASE}/{synthesizer_type}.jpg"
 
 
+def project_type(item: dict) -> str:
+    """根据 synthesizer_type 返回工程类型名（对应前端映射）。"""
+    t = item.get("synthesizer_type")
+    if t == 1:
+        return "Vocaloid 工程"
+    if t == 2:
+        name = item.get("synthesizer_name") or "其他"
+        return f"{name} 工程"
+    if t == 3:
+        return "MIDI 工程"
+    if t == 4:
+        return "插件/工具"
+    return "未知类型"
+
+
 async def search_projects(keyword: str, page: int = 1) -> tuple[list[dict], int]:
     """搜索工程，返回 (结果列表, 总数)。"""
     payload = {

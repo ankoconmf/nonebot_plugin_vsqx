@@ -4,7 +4,7 @@ from pathlib import Path
 
 from nonebot_plugin_htmlrender import template_to_pic
 
-from .api import cover_url, fetch_bytes
+from .api import cover_url, fetch_bytes, project_type
 
 TEMPLATE_DIR = Path(__file__).parent / "templates"
 
@@ -38,6 +38,7 @@ async def render_results(keyword: str, items: list[dict], total: int) -> bytes:
             {
                 "music_name": it.get("music_name") or "(无标题)",
                 "p_name": it.get("p_name") or "未知",
+                "ptype": project_type(it),
                 "download_num": it.get("download_num", 0),
                 "click_num": it.get("click_num", 0),
                 "tag": it.get("tag") or "",

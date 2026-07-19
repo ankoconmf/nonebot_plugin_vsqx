@@ -74,6 +74,22 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
   .info { flex: 1 1 auto; min-width: 0; }
+  .titleline {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+  .ptype {
+    flex: 0 0 auto;
+    font-size: 13px;
+    color: #5468e6;
+    border: 1px solid #b9c3f5;
+    background: #f5f7ff;
+    padding: 2px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
   .name {
     font-size: 21px;
     font-weight: 700;
@@ -81,7 +97,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    margin-bottom: 6px;
+    min-width: 0;
   }
   .pname {
     font-size: 15px;
@@ -123,7 +139,10 @@
         <div class="badge">{{ loop.index }}</div>
         <img class="cover" src="{{ it.cover }}" />
         <div class="info">
-          <div class="name">{{ it.music_name }}</div>
+          <div class="titleline">
+            <span class="ptype">{{ it.ptype }}</span>
+            <span class="name">{{ it.music_name }}</span>
+          </div>
           <div class="pname">P主：<b>{{ it.p_name }}</b></div>
           <div class="meta">
             <span class="chip">下载 {{ it.download_num }}</span>
