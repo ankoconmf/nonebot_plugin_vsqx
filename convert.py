@@ -38,33 +38,36 @@ async def convert_project(input_path: Path, fmt_key: str) -> Path:
     page = await ctx.new_page()
     try:
         await page.goto(UTAFORMATIX_URL, wait_until="networkidle", timeout=60000)
-        await page.wait_for_timeout(3000)
+        await page.wait_for_timeout(2000)
 
         # 1. 上传工程文件
         async with page.expect_file_chooser(timeout=15000) as fc_info:
             await page.click(".file-drop-target")
         fc = await fc_info.value
         await fc.set_files(str(input_path))
-        await page.wait_for_timeout(3500)
 
         # 若有导入警告弹窗（如缺节拍记号），尝试关闭 / 继续
         await _dismiss_dialog(page)
 
-        # 2. 选择输出格式
-        await page.get_by_text(fmt_key, exact=True).first.click()
-        await page.wait_for_timeout(1500)
+        # 2. 选择输出格式：等待格式卡出现（工程解析可能较慢），再点击
+        fmt_card = page.get_by_text(fmt_key, exact=True).first
+        await fmt_card.wait_for(timeout=30000)
+        await fmt_card.click()
 
         # 3. 设置页 → 下一步（使用默认设置）
+        next_btn = page.get_by_role("button", name="下一步")
         try:
-            await page.get_by_text("下一步", exact=True).click(timeout=8000)
+            await next_btn.wait_for(timeout=10000)
+            await next_btn.click()
         except Exception:
-            # 某些格式可能没有设置页，忽略
+            # 极少数格式可能没有设置页，忽略
             pass
-        await page.wait_for_timeout(2500)
 
-        # 4. 导出并抓取下载
-        async with page.expect_download(timeout=30000) as dl_info:
-            await page.get_by_text("导出", exact=True).last.click()
+        # 4. 导出并抓取下载：等导出按钮出现再点
+        export_btn = page.get_by_role("button", name="导出")
+        await export_btn.wait_for(timeout=15000)
+        async with page.expect_download(timeout=60000) as dl_info:
+            await export_btn.click()
         download = await dl_info.value
 
         out_name = download.suggested_filename or f"{input_path.stem}_{fmt_key}.zip"
