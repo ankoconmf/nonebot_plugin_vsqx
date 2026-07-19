@@ -20,3 +20,6 @@ _t.mid
 .vscode/
 .idea/
 .DS_Store
+
+# 预览图（改用 GitHub Release 外链，不入库）
+QQ_*.png
