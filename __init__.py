@@ -346,7 +346,9 @@ async def handle_convert_number(bot: Bot, event: GroupMessageEvent):
 
     fmt = EXPORT_FORMATS[idx - 1]
     file_path: Path = sess["file_path"]
-    await convert_num_matcher.send(f"正在转换为 {fmt['name']}，请稍候（约需 20 秒）…")
+    await convert_num_matcher.send(
+        f"正在转换为 {fmt['name']}，请稍候，较大工程可能需要一两分钟…"
+    )
 
     try:
         out_path = await convert_project(file_path, fmt["key"])

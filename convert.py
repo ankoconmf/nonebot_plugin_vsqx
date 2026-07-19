@@ -63,9 +63,10 @@ async def convert_project(input_path: Path, fmt_key: str) -> Path:
             # 极少数格式可能没有设置页，忽略
             pass
 
-        # 4. 导出并抓取下载：等导出按钮出现再点
+        # 4. 等待转换完成：点“下一步”后是实际转换计算，大工程/复杂格式可能较久，
+        #    导出按钮出现即表示处理完成（最多等 90 秒）
         export_btn = page.get_by_role("button", name="导出")
-        await export_btn.wait_for(timeout=15000)
+        await export_btn.wait_for(timeout=90000)
         async with page.expect_download(timeout=60000) as dl_info:
             await export_btn.click()
         download = await dl_info.value
