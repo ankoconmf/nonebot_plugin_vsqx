@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+    background: transparent;
+  }
+  .card {
+    width: 800px;
+    background: #f5f7fb;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 12px 40px rgba(80, 100, 180, 0.18);
+  }
+  .header {
+    padding: 26px 30px 22px;
+    background: linear-gradient(120deg, #6a8dff 0%, #8b6cf0 100%);
+    color: #fff;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+  .header .title {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  .header .title .dot { opacity: 0.85; font-weight: 400; font-size: 20px; }
+  .header .kw {
+    font-size: 15px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 6px 14px;
+    border-radius: 20px;
+    max-width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .list { padding: 14px 18px 8px; }
+  .row {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border-radius: 16px;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+    box-shadow: 0 3px 12px rgba(100, 120, 180, 0.08);
+  }
+  .badge {
+    flex: 0 0 auto;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #6a8dff, #8b6cf0);
+    color: #fff;
+    font-size: 22px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(106, 141, 255, 0.35);
+  }
+  .cover {
+    flex: 0 0 auto;
+    width: 88px;
+    height: 88px;
+    border-radius: 14px;
+    object-fit: cover;
+    margin: 0 16px;
+    background: #e7eaf0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  .info { flex: 1 1 auto; min-width: 0; }
+  .name {
+    font-size: 21px;
+    font-weight: 700;
+    color: #222;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 6px;
+  }
+  .pname {
+    font-size: 15px;
+    color: #7a8290;
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .pname b { color: #6a8dff; font-weight: 600; }
+  .meta { display: flex; gap: 10px; flex-wrap: wrap; }
+  .chip {
+    font-size: 13px;
+    color: #8a929e;
+    background: #f0f2f7;
+    padding: 3px 10px;
+    border-radius: 10px;
+  }
+  .chip.tag { color: #8b6cf0; background: #efeaff; }
+  .footer {
+    text-align: center;
+    color: #9aa2b0;
+    font-size: 15px;
+    padding: 16px 0 22px;
+    letter-spacing: 0.5px;
+  }
+  .footer b { color: #6a8dff; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="header">
+      <div class="title">vsqx.top <span class="dot">工程搜索</span></div>
+      <div class="kw">关键词：{{ keyword }}</div>
+    </div>
+    <div class="list">
+      {% for it in items %}
+      <div class="row">
+        <div class="badge">{{ loop.index }}</div>
+        <img class="cover" src="{{ it.cover }}" />
+        <div class="info">
+          <div class="name">{{ it.music_name }}</div>
+          <div class="pname">P主：<b>{{ it.p_name }}</b></div>
+          <div class="meta">
+            <span class="chip">下载 {{ it.download_num }}</span>
+            <span class="chip">浏览 {{ it.click_num }}</span>
+            {% if it.tag %}<span class="chip tag"># {{ it.tag }}</span>{% endif %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="footer">共 {{ total }} 个结果 · 发送对应<b>序号</b>即可下载工程文件</div>
+  </div>
+</body>
+</html>

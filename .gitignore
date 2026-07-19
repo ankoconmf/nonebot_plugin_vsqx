@@ -1,0 +1,22 @@
+# 登录凭证（含真实 token，切勿上传）
+vsqx_data.json
+
+# 下载/转换的临时文件
+downloads/
+
+# Python 缓存
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# 测试残留
+_test*.png
+_debug*
+_probe*
+_t.mid
+*.zip
+
+# 编辑器
+.vscode/
+.idea/
+.DS_Store

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: "Microsoft YaHei", "PingFang SC", sans-serif; background: transparent; }
+  .card {
+    width: 720px;
+    background: #f5f7fb;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 12px 40px rgba(80, 100, 180, 0.18);
+  }
+  .header {
+    padding: 26px 30px 22px;
+    background: linear-gradient(120deg, #6a8dff 0%, #8b6cf0 100%);
+    color: #fff;
+  }
+  .header .title { font-size: 27px; font-weight: 700; }
+  .header .sub { font-size: 15px; opacity: 0.92; margin-top: 6px; }
+  .list { padding: 18px 18px 6px; }
+  .item {
+    background: #fff;
+    border-radius: 16px;
+    padding: 15px 18px;
+    margin-bottom: 12px;
+    box-shadow: 0 3px 12px rgba(100, 120, 180, 0.08);
+  }
+  .cmd {
+    display: inline-block;
+    font-size: 18px;
+    font-weight: 700;
+    color: #5468e6;
+    background: #eef1ff;
+    padding: 4px 12px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+  }
+  .cmd .arg { color: #8b6cf0; font-weight: 600; }
+  .badge {
+    float: right;
+    font-size: 12px;
+    color: #fff;
+    background: #f0a840;
+    padding: 3px 10px;
+    border-radius: 10px;
+    margin-top: 4px;
+  }
+  .desc { font-size: 15px; color: #4a5160; line-height: 1.55; }
+  .footer {
+    text-align: center;
+    color: #9aa2b0;
+    font-size: 14px;
+    padding: 14px 0 22px;
+  }
+  .footer b { color: #6a8dff; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="header">
+      <div class="title">vsqx 工程助手 · 指令帮助</div>
+      <div class="sub">搜索下载 vsqx.top 工程 & UtaFormatix 格式转换</div>
+    </div>
+    <div class="list">
+      {% for c in cmds %}
+      <div class="item">
+        {% if c.badge %}<span class="badge">{{ c.badge }}</span>{% endif %}
+        <div class="cmd">{{ c.cmd | safe }}</div>
+        <div class="desc">{{ c.desc }}</div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="footer">发送 <b>#工程帮助</b> 可随时查看本说明</div>
+  </div>
+</body>
+</html>
