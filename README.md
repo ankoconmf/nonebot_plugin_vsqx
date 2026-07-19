@@ -13,11 +13,11 @@
 
 搜索与下载工程：
 
-![搜索下载](https://github.com/ankoconmf/nonebot_plugin_vsqx/releases/download/assets/QQ_1784485683960.png)
+![搜索下载](https://raw.githubusercontent.com/ankoconmf/nonebot_plugin_vsqx/refs/heads/resources/preview/search.png)
 
 工程格式转换：
 
-![格式转换](https://github.com/ankoconmf/nonebot_plugin_vsqx/releases/download/assets/QQ_1784485706907.png)
+![格式转换](https://raw.githubusercontent.com/ankoconmf/nonebot_plugin_vsqx/refs/heads/resources/preview/convert.png)
 
 ## 指令
 
